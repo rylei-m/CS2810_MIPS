@@ -2,7 +2,9 @@
 	A: .asciiz "Enter a:"
 	B: .asciiz "Enter b:"
 	C: .asciiz "Enter c:"
-	result: .asciiz " = "
+	resultE: .asciiz " = "
+	minus: .asciiz " - "
+	plus: .asciiz " + "
 	newline: .asciiz "\n"
 .text
 .globl main
@@ -49,7 +51,7 @@ main:
 	syscall
 	
 	li $v0, 4
-	la $a0, "-"
+	la $a0, minus
 	syscall
 	
 	li $v0, 1
@@ -57,15 +59,19 @@ main:
 	syscall
 	
 	li $v0, 4
-	la $a0, "+"
+	la $a0, plus
 	syscall
 	
 	li $v0, 1
-	la $a0, $t2 # c
+	move $a0, $t2 # c
 	syscall
 	
 	li $v0, 4
-	la $a0, "result"
+	la $a0, resultE # =
+	syscall
+	
+	li $v0, 1
+	move $a0, $t3
 	syscall
 	
 	li $v0, 1
